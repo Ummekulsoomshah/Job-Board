@@ -2,15 +2,16 @@ import React from 'react'
 import './home.css'
 import img1 from '../assets/campaign-creators-qCi_MzVODoU-unsplash.jpg'
 import img2 from '../assets/clem-onojeghuo-fY8Jr4iuPQM-unsplash.jpg'
+import { Link } from 'react-router-dom'
 const Home = () => {
     return (
         <>
         <div class="p-6 w-50 mx-auto bg-white rounded-xl shadow-lg  flex  items-center gap-4">
             <div class="text-4xl font-bold text-black">
-                <button class="text-xl font-medium text-black">SIGN UP</button>
+                <Link to='/userRegister' class="text-xl font-medium text-black">SIGN UP</Link>
             </div>
             <div class="text-4xl font-bold text-black">
-                <button class="text-xl font-medium text-black">LOGIN</button>
+                <Link to='/userLogin' class="text-xl font-medium text-black">LOGIN</Link>
             </div>
         </div>
         <h1 className="text-5xl font-bold text-black pt-10 text-center">Welcome to Job Board</h1>
