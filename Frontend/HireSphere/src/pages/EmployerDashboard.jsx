@@ -9,7 +9,7 @@ const EmployerDashboard = () => {
                 <Link to='/jobForm' class="text-xl font-medium text-black">Create Job</Link>
             </div>
             <div class="text-4xl font-bold text-black">
-                <Link to='/userLogin' class="text-xl font-medium text-black">See Applicants</Link>
+                <Link to='/ApplicantsList' class="text-xl font-medium text-black">See Applicants</Link>
             </div>
         </div>
         <h1 className="text-5xl font-bold text-black pt-10 text-center">Dear Employer ,Welcome</h1>

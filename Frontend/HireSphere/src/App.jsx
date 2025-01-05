@@ -6,6 +6,9 @@ import UserRegister from './pages/UserRegister';
 import UserContextState from './context/UserContext'
 import JobForm from './pages/JobForm';
 import EmployerDashboard from './pages/EmployerDashboard';
+import ApplicantsList from './pages/ApplicantsList'
+import ApplicantsProfile from './pages/ApplicantsProfile'
+import JobList from './pages/JobList'
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +20,10 @@ const App = () => {
         <Route path='/userLogin' element={<UserLogin />} />
         <Route path='/employeeDash' element={<EmployerDashboard/>} />
         <Route path='/jobForm' element={<JobForm/>} />
+        <Route path='/jobslisting' element={<JobList/>}/>
+        <Route path='/ApplicantsList' element={<ApplicantsList/>}/>
+        <Route path='/ApplicantsProfile' element={<ApplicantsProfile/>}/>
+
       </Routes>
        </UserContextState>
     </BrowserRouter>

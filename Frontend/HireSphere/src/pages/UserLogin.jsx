@@ -22,7 +22,11 @@ const UserLogin = () => {
         console.log(data)
         setuser(data.user)
         localStorage.setItem('token', data.token)
-        navigate('/employeeDash')
+        if (data.user.role === 'employer') {
+          navigate('/employeeDash');
+        } else if (data.user.role === 'job_seeker') {
+          navigate('/jobslisting');
+        }
       }
     } catch (error) {
       console.log('error', error)

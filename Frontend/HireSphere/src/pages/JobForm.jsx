@@ -3,25 +3,29 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 const JobForm = () => {
-    const [position, setPosition] = useState('')
+    const [jobName, setPosition] = useState('')
     const [company, setCompany] = useState('')
-    const [description, setDescription] = useState('')
-    const navigate=useNavigate()
+    const [jobDescription, setDescription] = useState('')
+    const navigate = useNavigate()
     const submitHandler = async (e) => {
         e.preventDefault()
         const jobData = {
-            position: position,
+            jobName: jobName,
             company: company,
-            description: description
+            jobDescription: jobDescription
         }
         try {
             console.log('before')
-            const response = await axios.post(`http://localhost:3000/jobformcreation`, jobData);
-
+            const response = await axios.post('http://localhost:3000/user/jobformcreation', jobData,
+             {  headers: {
+                    "authorization": `Bearer ${localStorage.getItem('token')} `
+                }}
+            );
             console.log('response', response)
             if (response.status === 201) {
                 const data = response.data
                 console.log(data)
+                navigate('/jobslisting')
             }
         }
         catch (error) {
@@ -40,7 +44,7 @@ const JobForm = () => {
 
                     <input
                         required
-                        value={position}
+                        value={jobName}
                         onChange={(e) => setPosition(e.target.value)}
                         className='bg-white bg-[#eeeeee] rounded mt-2 mb-5 px-10 py-2 border border-black w-full text-lg placeholder:text-base'
                         placeholder='abc developer'
@@ -57,7 +61,7 @@ const JobForm = () => {
                 <h3>Enter your Job description</h3>
                 <textarea
                     required
-                    value={description}
+                    value={jobDescription}
                     onChange={(e) => setDescription(e.target.value)}
                     className='bg-white bg-[#eeeeee] rounded px-10 mt-2 mb-5 py-2 border border-black w-full text-lg placeholder:text-base'
                     placeholder='candidate should be capable of ...' type="text" ></textarea>

@@ -7,8 +7,10 @@ router.post('/register',userController.register)
 router.post('/login',userController.login)
 
 router.post('/jobformcreation',authMiddleware,authorizRoles('employer'),userController.JobformCreation)
+router.post('/joblisting',authMiddleware,authorizRoles('employer'),userController.joblisting)
 
-router.get('/job-seeker',authMiddleware,authorizRoles('employer','job-seeker'),(req,res)=>{
-    res.json({message:"employerr welcom"})
-})
+
+
+router.get('/joblisting',authMiddleware,authorizRoles('employer','job-seeker'),userController.joblisting)
+
 module.exports=router

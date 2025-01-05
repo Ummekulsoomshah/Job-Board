@@ -3,32 +3,32 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const formModel = require('../models/form.model')
 module.exports.register = async (req, res, next) => {
-    try{
+    try {
 
         const { name, email, password, role } = req.body
-        const hashedpassword =await bcrypt.hash(password, 10)
+        const hashedpassword = await bcrypt.hash(password, 10)
         const user = await userModel.create({
             name,
-        email,
-        password: hashedpassword,
-        role
-    })
-    const token=jwt.sign({_id:user._id,role:user.role},'secret')
-    res.cookie('token',token)
-    res.status(201).json({
-        message: 'User created successfully',
-        user
-    })
-}catch(error){
-    next(error);
-}
+            email,
+            password: hashedpassword,
+            role
+        })
+        const token = jwt.sign({ _id: user._id, role: user.role }, 'secret')
+        res.cookie('token', token)
+        res.status(201).json({
+            message: 'User created successfully',
+            user
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
-module.exports.login=async(req,res,next)=>{
-    try{
+module.exports.login = async (req, res, next) => {
+    try {
 
-        const {password,email}=req.body
-        const user=await userModel.findOne({email})
+        const { password, email } = req.body
+        const user = await userModel.findOne({ email })
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -42,35 +42,45 @@ module.exports.login=async(req,res,next)=>{
             }
 
             const token = jwt.sign({ _id: user._id, role: user.role }, 'secret');
-            res.cookie('token', token);
+            res.cookie('token', token, { httpOnly: true });
             res.status(200).json({
                 message: 'Login successful',
                 user,
                 token
             });
         });
-    }catch (error) {
+    } catch (error) {
         next(error);
     }
 
 }
 
-module.exports.JobformCreation=async(req,res,next)=>{
-    try{
-        const {jobName,company,job_description}=req.body
-        const form=await formModel.create({
+module.exports.JobformCreation = async (req, res, next) => {
+    try {
+        const { jobName, company, jobDescription } = req.body
+        const form = await formModel.create({
             jobName,
             company,
-            job_description
+            jobDescription
         })
         res.status(201).json({
-            message:'Form created successfully',
+            message: 'Form created successfully',
             form
         })
     }
-    catch(error){
+    catch (error) {
         next(error)
     }
-    
+
+}
+
+module.exports.joblisting = async (req, res, next) => {
+    try {
+
+        const jobs = await formModel.find()
+        return res.status(200).json({ jobs })
+    } catch (error) {
+        next(error)
+    }
 }
 
