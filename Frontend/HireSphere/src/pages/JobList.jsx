@@ -40,7 +40,7 @@ const JobList = () => {
                         <div class="text-4xl font-bold text-black">
 
                         <p class="text-xl font-medium text-black">Description: {job.jobDescription}</p>
-                        <Link>Apply Now</Link>
+                        <Link to='/ApplicationForm'>Apply Now</Link>
                         </div>
                     </li>
                 ))}

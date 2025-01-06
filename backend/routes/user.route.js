@@ -7,10 +7,10 @@ router.post('/register',userController.register)
 router.post('/login',userController.login)
 
 router.post('/jobformcreation',authMiddleware,authorizRoles('employer'),userController.JobformCreation)
-router.post('/joblisting',authMiddleware,authorizRoles('employer'),userController.joblisting)
+// router.post('/joblisting',authMiddleware,authorizRoles('employer'),userController.joblisting)
 
 
 
-router.get('/joblisting',authMiddleware,authorizRoles('employer','job-seeker'),userController.joblisting)
+router.get('/joblisting',authMiddleware,authorizRoles('employer','job_seeker'),userController.joblisting)
 
 module.exports=router
