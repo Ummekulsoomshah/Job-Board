@@ -29,7 +29,7 @@ const JobList = () => {
         text-5xl font-bold text-black pt-10 text-center
         '>Job Listings</h1>
         {jobs.length > 0 ? (
-            <ul class=" w-full mx-auto  flex  items-center gap-10">
+            <ul class=" w-full mx-auto  flex flex-cols items-center gap-10">
                 {jobs.map((job) => (
                     <li key={job._id} class="p-6 text-4xl w-1/4 mx-auto bg-white rounded-xl shadow-lg ">
                         <h2>{job.jobName}</h2>

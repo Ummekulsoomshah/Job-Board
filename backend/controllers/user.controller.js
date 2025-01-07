@@ -2,6 +2,8 @@ const userModel = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const formModel = require('../models/form.model')
+const candidateModel = require('../models/candidate.model')
+const upload=require('../middlewares/upload.middleware')
 module.exports.register = async (req, res, next) => {
     try {
 
@@ -81,6 +83,25 @@ module.exports.joblisting = async (req, res, next) => {
         return res.status(200).json({ jobs })
     } catch (error) {
         next(error)
+    }
+}
+
+module.exports.JobApplysubmit = async (req, res, next) => {
+    try {
+        const { name, email, skills } = req.body
+        const resume = req.file.path;
+        const newcandidate = await candidateModel.create({
+            name,
+            email,
+            skills,
+            resume
+        })
+        res.status(200).json({
+            newcandidate,
+            message: "candidtae created",
+        })
+    } catch (err) {
+        next(err)
     }
 }
 
