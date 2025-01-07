@@ -22,9 +22,9 @@ const App = () => {
         <Route path='/employeeDash' element={<EmployerDashboard/>} />
         <Route path='/jobForm' element={<JobForm/>} />
         <Route path='/jobslisting' element={<JobList/>}/>
-        <Route path='/ApplicantsList' element={<ApplicantsList/>}/>
+        <Route path='/ApplicantsList/:jobId' element={<ApplicantsList/>}/>
         <Route path='/ApplicantsProfile' element={<ApplicantsProfile/>}/>
-        <Route path='/ApplicationForm' element={<ApplicationForm/>}/>
+        <Route path='/ApplicationForm/:jobId' element={<ApplicationForm/>}/>
 
       </Routes>
        </UserContextState>

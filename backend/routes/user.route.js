@@ -9,8 +9,8 @@ router.post('/login',userController.login)
 
 router.post('/jobformcreation',authMiddleware,authorizRoles('employer'),userController.JobformCreation)
 
-
+router.post('/applicantList/:jobId',authMiddleware,authorizRoles('employer'),userController.applicantsList)
 
 router.get('/joblisting',authMiddleware,authorizRoles('employer','job_seeker'),userController.joblisting)
-router.post('/JobApplysubmit',authMiddleware,authorizRoles('employer','job_seeker'), upload.single('resume'),userController.JobApplysubmit)
+router.post('/JobApplysubmit/:jobId',authMiddleware,authorizRoles('employer','job_seeker'), upload.single('resume'),userController.JobApplysubmit)
 module.exports=router

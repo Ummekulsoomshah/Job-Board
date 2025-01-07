@@ -80,7 +80,8 @@ module.exports.joblisting = async (req, res, next) => {
     try {
 
         const jobs = await formModel.find()
-        return res.status(200).json({ jobs })
+        console.log(req.user.role)
+        return res.status(200).json({ jobs,role: req.user.role})
     } catch (error) {
         next(error)
     }
@@ -89,12 +90,15 @@ module.exports.joblisting = async (req, res, next) => {
 module.exports.JobApplysubmit = async (req, res, next) => {
     try {
         const { name, email, skills } = req.body
+        const { jobId } = req.params;
+
         const resume = req.file.path;
         const newcandidate = await candidateModel.create({
             name,
             email,
             skills,
-            resume
+            resume,
+            jobId
         })
         res.status(200).json({
             newcandidate,
@@ -102,6 +106,16 @@ module.exports.JobApplysubmit = async (req, res, next) => {
         })
     } catch (err) {
         next(err)
+    }
+}
+
+module.exports.applicantsList=async(req,res,next)=>{
+    try {
+        const { jobId } = req.params;
+        const applicants = await candidateModel.find({ jobId });
+        res.status(200).json({ applicants });
+    } catch (error) {
+        next(error);
     }
 }
 

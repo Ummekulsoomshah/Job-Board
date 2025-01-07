@@ -1,26 +1,30 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/hireSphere')
 
-const candidateSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        trim:true
-    },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
-        trim:true
-    },
-    skills:{
-        type:String,
-        required:true,
-        trim:true
-    },
-    resume: { 
+const candidateSchema = new mongoose.Schema({
+    name: {
         type: String,
-        required:true 
-      }, // Default role
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
+    skills: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    resume: {
+        type: String,
+        required: true
+    }, // Default role
+    jobId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Jobform'
+    }
 })
-module.exports=mongoose.model('Candidate',candidateSchema)
+module.exports = mongoose.model('Candidate', candidateSchema)

@@ -1,22 +1,26 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 const ApplicationForm = () => {
+  const { jobId } = useParams()
+
     const [name, setname] = useState()
     const [email, setemail] = useState()
     const [skills, setskills] = useState()
     const [resume, setresume] = useState(null)
+
     const navigate = useNavigate()
     const submitHandler = async (e) => {
         e.preventDefault()
+        console.log("jobId",jobId)
         const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
     formData.append("skills", skills);
     formData.append("resume", resume); // Append the resume file
         try {
-            const response = await axios.post(`http://localhost:3000/user/JobApplysubmit`, formData, {
+            const response = await axios.post(`http://localhost:3000/user/JobApplysubmit/${jobId}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data", // Specify content type
                     "authorization": `Bearer ${localStorage.getItem('token')}`
